@@ -31,8 +31,8 @@ def train_model(train_dir, validation_dir, model_save_path, epochs=10, batch_siz
     return history
 
 if __name__ == "__main__":
-    train_dir = 'path_to_train_directory'
-    validation_dir = 'path_to_validation_directory'
+    train_dir = 'data/train'
+    validation_dir = 'data/validation'
     model_save_path = 'model/gender_classification_model.h5'
     epochs = 10
     batch_size = 32

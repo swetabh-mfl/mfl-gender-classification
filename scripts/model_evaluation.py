@@ -9,7 +9,7 @@ def evaluate_model(validation_dir, model_path):
     print(f'Validation accuracy: {accuracy*100:.2f}%')
 
 if __name__ == "__main__":
-    validation_dir = 'path_to_validation_directory'
+    validation_dir = 'data/validation'
     model_path = 'model/gender_classification_model.h5'
     evaluate_model(validation_dir, model_path)
 
