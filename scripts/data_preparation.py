@@ -32,7 +32,7 @@ def prepare_data(train_dir, validation_dir):
     return train_generator, validation_generator
 
 if __name__ == "__main__":
-    train_dir = 'path_to_train_directory'
-    validation_dir = 'path_to_validation_directory'
+    train_dir = 'data/train'
+    validation_dir = 'data/validation'
     prepare_data(train_dir, validation_dir)
 
