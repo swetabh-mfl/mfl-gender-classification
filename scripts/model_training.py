@@ -1,18 +1,16 @@
 import sys
 import os
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 
 # Assuming 'scripts' directory is in the same directory as model_training.py
 scripts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'scripts'))
 sys.path.append(scripts_dir)
-
-
-from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 from data_preparation import prepare_data
 from model_building import build_model
 
-def train_model(train_dir, validation_dir, model_save_path, epochs=10, batch_size=32):
+def train_model(train_dir, validation_dir, model_save_path, epochs=10, batch_size=32, num_classes=2):
     train_generator, validation_generator = prepare_data(train_dir, validation_dir)
-    model = build_model()
+    model = build_model(num_classes=num_classes)  # Pass num_classes argument here
 
     checkpoint = ModelCheckpoint(
         model_save_path,
@@ -41,7 +39,9 @@ def train_model(train_dir, validation_dir, model_save_path, epochs=10, batch_siz
 if __name__ == "__main__":
     train_dir = 'data/train'
     validation_dir = 'data/validation'
-    model_save_path = 'model/gender_classification_model.h5'
+    model_save_path = 'models/gender_classification_model.h5'  # Corrected path
     epochs = 10
     batch_size = 32
-    train_model(train_dir, validation_dir, model_save_path, epochs, batch_size)
+    num_classes = 2  # Replace with actual number of classes in your dataset
+
+    train_model(train_dir, validation_dir, model_save_path, epochs, batch_size, num_classes)
