@@ -1,6 +1,14 @@
+import sys
+import os
+
+# Assuming 'scripts' directory is in the same directory as model_training.py
+scripts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'scripts'))
+sys.path.append(scripts_dir)
+
+
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
-from scripts.data_preparation import prepare_data
-from scripts.model_building import build_model
+from data_preparation import prepare_data
+from model_building import build_model
 
 def train_model(train_dir, validation_dir, model_save_path, epochs=10, batch_size=32):
     train_generator, validation_generator = prepare_data(train_dir, validation_dir)
@@ -37,4 +45,3 @@ if __name__ == "__main__":
     epochs = 10
     batch_size = 32
     train_model(train_dir, validation_dir, model_save_path, epochs, batch_size)
-
