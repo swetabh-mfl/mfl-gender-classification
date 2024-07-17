@@ -16,9 +16,3 @@ def build_model(num_classes):
 
     model = Model(inputs=inputs, outputs=outputs, name="gender_classification_model")
     return model
-
-
-if __name__ == "__main__":
-    model = build_model()
-    model.summary()
-

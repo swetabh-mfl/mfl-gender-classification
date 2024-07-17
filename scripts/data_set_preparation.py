@@ -3,7 +3,7 @@ import shutil
 import random
 
 # Paths
-dataset_dir = 'path_to_extracted_dataset'
+dataset_dir = 'part3'
 train_dir_male = 'data/train/male'
 train_dir_female = 'data/train/female'
 val_dir_male = 'data/validation/male'

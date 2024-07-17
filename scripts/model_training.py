@@ -1,21 +1,14 @@
-import sys
 import os
+import sys
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
-
-# Assuming 'scripts' directory is in the same directory as model_training.py
-scripts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'scripts'))
-sys.path.append(scripts_dir)
-from data_preparation import prepare_data
 from model_building import build_model
+from data_preparation import prepare_train_data
 
 def train_model(train_dir, validation_dir, model_save_path, epochs=10, batch_size=32, num_classes=2):
-    train_generator, validation_generator = prepare_data(train_dir, validation_dir)
-    model = build_model(num_classes=num_classes)
+    train_generator, validation_generator = prepare_train_data(train_dir, validation_dir)
+    model = build_model(num_classes)
 
-    # Compile the model
-    model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy',
-                  metrics=['accuracy'])
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
     checkpoint = ModelCheckpoint(
         model_save_path,
@@ -24,6 +17,7 @@ def train_model(train_dir, validation_dir, model_save_path, epochs=10, batch_siz
         mode='max',
         verbose=1
     )
+
     early_stopping = EarlyStopping(
         monitor='val_loss',
         patience=5,
@@ -48,5 +42,4 @@ if __name__ == "__main__":
     epochs = 10
     batch_size = 32
     num_classes = 2
-
     train_model(train_dir, validation_dir, model_save_path, epochs, batch_size, num_classes)
