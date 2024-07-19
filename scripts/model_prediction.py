@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 from tensorflow.keras.models import load_model
 import tensorflow_hub as hub
@@ -15,7 +16,7 @@ def predict_gender(model_path, img_path):
 
     # Predict gender
     prediction = model.predict(img_array)
-    gender = 'Male' if prediction[0][0] > 0.5 else 'Female'  # Adjust based on your model's output format
+    gender = 'Female' if prediction[0][0] > 0.5 else 'Male'  # Adjust based on your model's output format
     return gender
 
 if __name__ == '__main__':
